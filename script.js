@@ -375,6 +375,8 @@ const shield=new Image();
 shield.src="./shieldimage.png";
 const turretbullet=new Image();
 turretbullet.src="./yellowcircle.jpg";
+var bulletsound=new Audio("foodsound.wav");
+var alien2sound=new Audio("alien2sound.wav");
 let shields={
     img:shield,
     x:home.x,
@@ -531,7 +533,7 @@ function animate(){
     c.drawImage(life,homelife.x,homelife.y,homelife.height,homelife.width)
     c.drawImage(playerhealth,playerlife.x,playerlife.y,playerlife.height,playerlife.width)
     c.drawImage(playerhealth2,playerlife2.x,playerlife2.y,playerlife2.height,playerlife2.width)
-   /*  c.drawImage(turretbullet,turretbullets.x,turretbullets.y,turretbullets.height,turretbullets.width); */
+    c.drawImage(turretbullet,turretbullets.x,turretbullets.y,turretbullets.height,turretbullets.width);
     botss.forEach((bots,index) =>{
         if(bots.position.y + bots.radius <=0){
             botss.splice(index,1);
@@ -547,6 +549,8 @@ function animate(){
     if(score>600 && score<1000){
         c.drawImage(turret,turrets.x,turrets.y,turrets.height,turrets.width);
         c.drawImage(turretbullet,turretbullets.x,turretbullets.y,turretbullets.height,turretbullets.width);
+        turretbullet.x+=1;
+        turretbullet.y+=1;
         for(let i=0;i<turretbulletArray.length;i++)
         {
             let tbullet=turretbulletArray[i];
@@ -647,7 +651,7 @@ function animate(){
          } 
 /*          if(score >= 1000 && z){
              salien.alive=true;
-         } */
+         }  */
     }
   
     if(homelife.width==-20){
@@ -1025,13 +1029,14 @@ window.addEventListener("mousemove",(e) =>{
         })
         
         ) 
+        bulletsound.play();
 })
 var myInterval=setInterval(() => {
     createAliens();
 },13000);
 setInterval(() =>{
     createbullets();
-    /* alienaudio.play(); */
+     alien2sound.play();
 },1500)
 setInterval(() =>{
     createAliens1();
